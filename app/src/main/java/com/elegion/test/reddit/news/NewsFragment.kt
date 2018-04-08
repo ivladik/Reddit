@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.news_fragment.*
  */
 class NewsFragment : BaseFragment() {
 
-    private val mNewsManager by lazy { // todo: why not: NewsManager()
+    private val mNewsManager by lazy {
         NewsManager()
     }
 
