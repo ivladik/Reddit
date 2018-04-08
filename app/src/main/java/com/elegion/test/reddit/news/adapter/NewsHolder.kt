@@ -1,9 +1,7 @@
-package com.elegion.test.reddit.adapter
+package com.elegion.test.reddit.news.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.elegion.test.reddit.R
-import com.elegion.test.reddit.R.id.*
 import com.elegion.test.reddit.extensions.getFriendlyTime
 import com.elegion.test.reddit.extensions.loadImg
 import com.elegion.test.reddit.model.RedditNewsItem

@@ -1,11 +1,11 @@
-package com.elegion.test.reddit.news
+package com.elegion.test.reddit
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.Toolbar
-import com.elegion.test.reddit.R
+import com.elegion.test.reddit.news.NewsFragment
 
 class MainActivity : AppCompatActivity() {
 

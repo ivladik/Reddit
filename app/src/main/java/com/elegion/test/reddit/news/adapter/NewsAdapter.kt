@@ -1,4 +1,4 @@
-package com.elegion.test.reddit.adapter
+package com.elegion.test.reddit.news.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater

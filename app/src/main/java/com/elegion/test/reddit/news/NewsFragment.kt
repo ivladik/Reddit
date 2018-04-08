@@ -1,21 +1,28 @@
 package com.elegion.test.reddit.news
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.elegion.test.reddit.BaseFragment
 import com.elegion.test.reddit.R
-import com.elegion.test.reddit.adapter.NewsAdapter
+import com.elegion.test.reddit.news.adapter.NewsAdapter
 import com.elegion.test.reddit.extensions.inflate
-import com.elegion.test.reddit.model.RedditNewsItem
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.news_fragment.*
 
 /**
  * Created by Vladislav Falzan.
  */
-class NewsFragment : Fragment() {
+class NewsFragment : BaseFragment() {
+
+    private val mNewsManager by lazy { // todo: why not: NewsManager()
+        NewsManager()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.news_fragment)
@@ -30,19 +37,28 @@ class NewsFragment : Fragment() {
         initAdapter()
 
         if (savedInstanceState == null) {
-            val news = mutableListOf<RedditNewsItem>()
-            for (i in 1..10) {
-                news.add(RedditNewsItem(
-                        "author$i",
-                        "Title $i",
-                        i, // number of comments
-                        1457207701L - i * 200, // time
-                        "http://lorempixel.com/200/200/technics/$i", // image url
-                        "url"
-                ))
-            }
-            (news_list.adapter as NewsAdapter).addNews(news)
+            requestNews()
         }
+    }
+
+    private fun requestNews() {
+        val disposable = mNewsManager.getNews()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { news ->
+                            (news_list.adapter as NewsAdapter).addNews(news)
+                        },
+                        { error ->
+                            Snackbar.make(
+                                    news_list,
+                                    error.message ?: "",
+                                    Snackbar.LENGTH_LONG
+                            )
+                                    .show()
+                        }
+                )
+        mCompositeDisposable.add(disposable)
     }
 
     private fun initAdapter() {
