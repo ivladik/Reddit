@@ -1,13 +1,13 @@
-package com.elegion.test.reddit
+package com.elegion.test.reddit.weather
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.Toolbar
-import com.elegion.test.reddit.news.NewsFragment
+import com.elegion.test.reddit.R
 
-class MainActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            changeFragment(NewsFragment())
+            changeFragment(WeatherFragment())
         }
     }
 

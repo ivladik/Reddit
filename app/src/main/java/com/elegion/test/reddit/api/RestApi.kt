@@ -1,29 +1,39 @@
 package com.elegion.test.reddit.api
 
-import com.elegion.test.reddit.model.RedditNewsItem
-import com.elegion.test.reddit.model.RedditNewsResponse
+import com.elegion.test.reddit.BuildConfig
+import com.elegion.test.reddit.model.WeatherResponse
 import io.reactivex.Single
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Created by Vladislav Falzan.
  */
 class RestApi {
 
-    private val restApi: RedditApi
+    private val mRestApi: WeatherService
 
     init {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://www.reddit.com")
-                .addConverterFactory(MoshiConverterFactory.create())
+                .baseUrl(BuildConfig.API_ENDPOINT)
+                .client(getClient())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-        restApi = retrofit.create(RedditApi::class.java)
+        mRestApi = retrofit.create(WeatherService::class.java)
     }
 
-    fun getNews(after: String, limit: String): Single<RedditNewsResponse> {
-        return restApi.getTop(after, limit)
+    private fun getClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+                .addInterceptor(ApiKeyInterceptor())
+                .addInterceptor(HttpLoggingInterceptor())
+                .build()
+    }
+
+    fun getWeather(bbox: String): Single<WeatherResponse> {
+        return mRestApi.getWeather(bbox)
     }
 }

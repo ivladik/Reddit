@@ -1,4 +1,4 @@
-package com.elegion.test.reddit
+package com.elegion.test.reddit.common
 
 import android.support.v4.app.Fragment
 import io.reactivex.disposables.CompositeDisposable

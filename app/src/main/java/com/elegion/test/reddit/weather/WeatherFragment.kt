@@ -1,38 +1,35 @@
-package com.elegion.test.reddit.news
+package com.elegion.test.reddit.weather
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.elegion.test.reddit.BaseFragment
+import com.elegion.test.reddit.common.BaseFragment
 import com.elegion.test.reddit.R
-import com.elegion.test.reddit.news.adapter.NewsAdapter
+import com.elegion.test.reddit.weather.adapter.WeatherAdapter
 import com.elegion.test.reddit.extensions.inflate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.news_fragment.*
+import kotlinx.android.synthetic.main.fr_weather.*
 
 /**
  * Created by Vladislav Falzan.
  */
-class NewsFragment : BaseFragment() {
+class WeatherFragment : BaseFragment() {
 
-    private val mNewsManager by lazy {
-        NewsManager()
-    }
+    private val mWeatherManager = WeatherManager()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return container?.inflate(R.layout.news_fragment)
+        return container?.inflate(R.layout.fr_weather)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        news_list.setHasFixedSize(true)
-        news_list.layoutManager = LinearLayoutManager(context)
+        weather_list.setHasFixedSize(true)
+        weather_list.layoutManager = LinearLayoutManager(context)
 
         initAdapter()
 
@@ -42,16 +39,16 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun requestNews() {
-        val disposable = mNewsManager.getNews()
+        val disposable = mWeatherManager.getWeather()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { news ->
-                            (news_list.adapter as NewsAdapter).addNews(news)
+                        { weatherList ->
+                            (weather_list.adapter as WeatherAdapter).addWeather(weatherList)
                         },
                         { error ->
                             Snackbar.make(
-                                    news_list,
+                                    weather_list,
                                     error.message ?: "",
                                     Snackbar.LENGTH_LONG
                             )
@@ -62,8 +59,8 @@ class NewsFragment : BaseFragment() {
     }
 
     private fun initAdapter() {
-        if (news_list.adapter == null) {
-            news_list.adapter = NewsAdapter()
+        if (weather_list.adapter == null) {
+            weather_list.adapter = WeatherAdapter()
         }
     }
 }
