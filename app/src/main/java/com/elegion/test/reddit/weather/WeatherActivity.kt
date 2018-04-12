@@ -3,13 +3,14 @@ package com.elegion.test.reddit.weather
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.Toolbar
 import com.elegion.test.reddit.R
 import kotlinx.android.synthetic.main.ac_main.*
 
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,5 +53,21 @@ class WeatherActivity : AppCompatActivity() {
         } else {
             finish()
         }
+    }
+
+    override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        val isEnabled = verticalOffset == 0
+        if (isEnabled == refresher.isEnabled) return
+        refresher.isEnabled = isEnabled
+    }
+
+    override fun onResume() {
+        super.onResume()
+        app_bar_layout.addOnOffsetChangedListener(this)
+    }
+
+    override fun onPause() {
+        app_bar_layout.removeOnOffsetChangedListener(this)
+        super.onPause()
     }
 }
