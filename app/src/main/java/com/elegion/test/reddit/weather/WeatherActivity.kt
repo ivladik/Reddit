@@ -1,11 +1,13 @@
 package com.elegion.test.reddit.weather
 
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.Toolbar
 import com.elegion.test.reddit.R
+import kotlinx.android.synthetic.main.ac_main.*
 
 class WeatherActivity : AppCompatActivity() {
 
@@ -14,6 +16,11 @@ class WeatherActivity : AppCompatActivity() {
         setContentView(R.layout.ac_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            collapsing_toolbar_layout.title = resources.getString(R.string.app_name)
+            collapsing_toolbar_layout.setExpandedTitleColor(resources.getColor(android.R.color.transparent, theme))
+        }
 
         if (savedInstanceState == null) {
             changeFragment(WeatherFragment())
@@ -25,7 +32,7 @@ class WeatherActivity : AppCompatActivity() {
         if (cleanStack) {
             clearBackStack()
         }
-        ft.replace(R.id.activity_base_content, f)
+        ft.replace(R.id.container, f)
         ft.addToBackStack(null)
         ft.commit()
     }
