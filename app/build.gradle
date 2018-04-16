@@ -13,11 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String", "API_ENDPOINT", '"http://api.openweathermap.org/"'
-        buildConfigField "String", "API_KEY", '"cce783b18f5ecbb363ef895939be60ea"'
-        buildConfigField "String", "API_CITIES_IDS", '"498817,524901"'
-        buildConfigField "String", "API_BOUNDING_BOX", '"12,32,15,37,10"'
     }
     buildTypes {
         release {
@@ -25,11 +20,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "api"
+    productFlavors {
+        openweathermap {
+            dimension "api"
+            applicationIdSuffix ".openweathermap"
+            buildConfigField "String", "API_ENDPOINT", '"http://api.openweathermap.org/"'
+            buildConfigField "String", "API_KEY", '"cce783b18f5ecbb363ef895939be60ea"'
+            buildConfigField "String", "API_BOUNDING_BOX", '"12,32,15,37,10"'
+            resValue "string", "flavored_app_name", "OpenWeatherMap"
+        }
+        worldweatheronline {
+            dimension "api"
+            applicationIdSuffix ".worldweatheronline"
+            buildConfigField "String", "API_ENDPOINT", '"http://api.worldweatheronline.com/"'
+            buildConfigField "String", "API_KEY", '"a5e59f6ea201461f860175218181404"'
+            resValue "string", "flavored_app_name", "WorldWeatherOnline"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

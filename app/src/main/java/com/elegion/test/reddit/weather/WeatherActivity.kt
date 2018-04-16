@@ -19,7 +19,7 @@ class WeatherActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedListene
         setSupportActionBar(toolbar)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            collapsing_toolbar_layout.title = resources.getString(R.string.app_name)
+            collapsing_toolbar_layout.title = resources.getString(R.string.flavored_app_name)
             collapsing_toolbar_layout.setExpandedTitleColor(resources.getColor(android.R.color.transparent, theme))
         }
 
