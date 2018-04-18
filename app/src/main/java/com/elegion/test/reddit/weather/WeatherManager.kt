@@ -10,7 +10,7 @@ import io.reactivex.Single
  */
 class WeatherManager(private val mApi: RestApi = RestApi()) {
 
-    fun getWeather(bbox: String = BuildConfig.API_BOUNDING_BOX): Single<List<Weather>> {
+    fun getWeather(bbox: String = BuildConfig.API_ARGS): Single<List<Weather>> {
         return Single.create {
             emitter ->
             val apiResponse = mApi.getWeather(bbox)

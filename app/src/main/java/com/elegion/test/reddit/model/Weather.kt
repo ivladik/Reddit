@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class Weather(
         @SerializedName("id")
-        val mId: Int, // todo: make private and customize setter/getter
+        val mId: Int,
         @SerializedName("name")
         val mCityName: String,
         @SerializedName("main")

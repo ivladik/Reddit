@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
  */
 open class BaseFragment : Fragment() {
 
-    protected var mCompositeDisposable = CompositeDisposable() // todo: why not lazy init?
+    protected var mCompositeDisposable = CompositeDisposable()
 
     override fun onResume() {
         super.onResume()

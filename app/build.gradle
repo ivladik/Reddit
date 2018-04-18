@@ -27,7 +27,8 @@ android {
             applicationIdSuffix ".openweathermap"
             buildConfigField "String", "API_ENDPOINT", '"http://api.openweathermap.org/"'
             buildConfigField "String", "API_KEY", '"cce783b18f5ecbb363ef895939be60ea"'
-            buildConfigField "String", "API_BOUNDING_BOX", '"12,32,15,37,10"'
+            buildConfigField "String", "API_ARGS", '"12,32,15,37,10"'
+            buildConfigField "String", "API_PREFIX_NAME", '"appid"'
             resValue "string", "flavored_app_name", "OpenWeatherMap"
         }
         worldweatheronline {
@@ -35,6 +36,8 @@ android {
             applicationIdSuffix ".worldweatheronline"
             buildConfigField "String", "API_ENDPOINT", '"http://api.worldweatheronline.com/"'
             buildConfigField "String", "API_KEY", '"a5e59f6ea201461f860175218181404"'
+            buildConfigField "String", "API_ARGS", '"12,32,15,37,10"'
+            buildConfigField "String", "API_PREFIX_NAME", '"key"'
             resValue "string", "flavored_app_name", "WorldWeatherOnline"
         }
     }
@@ -44,7 +47,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
