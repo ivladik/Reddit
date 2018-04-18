@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elegion.test.reddit.common.BaseFragment
 import com.elegion.test.reddit.R
+import com.elegion.test.reddit.api.ManagerProvider
 import com.elegion.test.reddit.weather.adapter.WeatherAdapter
 import com.elegion.test.reddit.extensions.inflate
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fr_weather.*
  */
 class WeatherFragment : BaseFragment() {
 
-    private val mWeatherManager = WeatherManager()
+    private val mWeatherManager = ManagerProvider.provide()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return container?.inflate(R.layout.fr_weather)

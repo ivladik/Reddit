@@ -1,6 +1,8 @@
-package com.elegion.test.reddit.api
+package com.elegion.test.reddit.common
 
 import com.elegion.test.reddit.BuildConfig
+import com.elegion.test.reddit.api.ApiKeyInterceptor
+import com.elegion.test.reddit.api.WeatherService
 import com.elegion.test.reddit.model.WeatherResponse
 import io.reactivex.Single
 import okhttp3.OkHttpClient
@@ -12,9 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by Vladislav Falzan.
  */
-class RestApi {
+abstract class RestApi {
 
-    private val mRestApi: WeatherService
+    protected val mRestApi: WeatherService
 
     init {
         val retrofit = Retrofit.Builder()
@@ -33,7 +35,5 @@ class RestApi {
                 .build()
     }
 
-    fun getWeather(bbox: String): Single<WeatherResponse> {
-        return mRestApi.getWeather(bbox)
-    }
+    abstract fun getWeather(args: String): Single<WeatherResponse>
 }
