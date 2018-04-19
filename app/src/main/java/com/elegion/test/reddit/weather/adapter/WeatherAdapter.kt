@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.elegion.test.reddit.R
 import com.elegion.test.reddit.common.BaseWeatherModel
-import com.elegion.test.reddit.model.Weather
 
 /**
  * Created by Vladislav Falzan.

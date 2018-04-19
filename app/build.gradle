@@ -26,18 +26,22 @@ android {
             dimension "api"
             applicationIdSuffix ".openweathermap"
             buildConfigField "String", "API_ENDPOINT", '"http://api.openweathermap.org/"'
-            buildConfigField "String", "API_KEY", '"cce783b18f5ecbb363ef895939be60ea"'
+            buildConfigField "String", "API_GET", '"data/2.5/box/city?units=metric"'
+            buildConfigField "String", "API_ARGS_NAME", '"bbox"'
             buildConfigField "String", "API_ARGS", '"12,32,15,37,10"'
-            buildConfigField "String", "API_PREFIX_NAME", '"appid"'
+            buildConfigField "String", "API_KEY_PREFIX", '"appid"'
+            buildConfigField "String", "API_KEY", '"cce783b18f5ecbb363ef895939be60ea"'
             resValue "string", "flavored_app_name", "OpenWeatherMap"
         }
         worldweatheronline {
             dimension "api"
             applicationIdSuffix ".worldweatheronline"
             buildConfigField "String", "API_ENDPOINT", '"http://api.worldweatheronline.com/"'
+            buildConfigField "String", "API_GET", '"premium/v1/weather.ashx?format=json"'
+            buildConfigField "String", "API_ARGS_NAME", '"q"'
+            buildConfigField "String", "API_ARGS", '"London"'
+            buildConfigField "String", "API_KEY_PREFIX", '"key"'
             buildConfigField "String", "API_KEY", '"a5e59f6ea201461f860175218181404"'
-            buildConfigField "String", "API_ARGS", '"12,32,15,37,10"'
-            buildConfigField "String", "API_PREFIX_NAME", '"key"'
             resValue "string", "flavored_app_name", "WorldWeatherOnline"
         }
     }
