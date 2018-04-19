@@ -5,6 +5,6 @@ package com.elegion.test.reddit.common
  */
 data class BaseWeatherModel(
         var mName: String,
-        var mTemperature: Int,
+        var mTemperature: Double,
         var mHumidity: Int
 )

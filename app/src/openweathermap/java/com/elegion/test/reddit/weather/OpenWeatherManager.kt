@@ -2,8 +2,8 @@ package com.elegion.test.reddit.weather
 
 import com.elegion.test.reddit.BuildConfig
 import com.elegion.test.reddit.api.OpenWeatherRestApi
+import com.elegion.test.reddit.common.BaseWeatherModel
 import com.elegion.test.reddit.common.RestApi
-import com.elegion.test.reddit.model.Weather
 import io.reactivex.Single
 
 /**
@@ -11,13 +11,20 @@ import io.reactivex.Single
  */
 class OpenWeatherManager(private val mApi: RestApi = OpenWeatherRestApi()) {
 
-    fun getWeather(args: String = BuildConfig.API_ARGS): Single<List<Weather>> {
+    fun getWeather(args: String = BuildConfig.API_ARGS): Single<List<BaseWeatherModel>> {
         return Single.create {
             emitter ->
             val apiResponse = mApi.getWeather(args)
             apiResponse.subscribe({
                 response ->
-                emitter.onSuccess(response.mList)
+                val dataList = response.mList.map {
+                    BaseWeatherModel(
+                            it.mCityName,
+                            it.mTemperatureObject.mTemperature,
+                            it.mTemperatureObject.mHumidity
+                    )
+                }
+                emitter.onSuccess(dataList)
             })
         }
     }
