@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fr_weather.*
 /**
  * Created by Vladislav Falzan.
  */
-class WeatherFragment : BaseFragment() {
+class WeatherFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private val mWeatherManager = ManagerProvider.provide()
 
@@ -30,20 +30,21 @@ class WeatherFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        refresher.setOnRefreshListener(this)
+
         weather_list.setHasFixedSize(true)
         weather_list.layoutManager = LinearLayoutManager(context)
 
         initAdapter()
-
-        if (savedInstanceState == null) {
-            requestNews()
-        }
+        onRefresh()
     }
 
     private fun requestNews() {
         val disposable = mWeatherManager.getWeather()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe({ refresher.isRefreshing = true })
+                .doFinally({ refresher.isRefreshing = false })
                 .subscribe(
                         { weatherList ->
                             (weather_list.adapter as WeatherAdapter).addWeather(weatherList)
@@ -64,5 +65,9 @@ class WeatherFragment : BaseFragment() {
         if (weather_list.adapter == null) {
             weather_list.adapter = WeatherAdapter()
         }
+    }
+
+    override fun onRefresh() {
+        refresher.post(this::requestNews)
     }
 }
