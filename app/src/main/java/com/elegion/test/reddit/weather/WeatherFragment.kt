@@ -2,6 +2,7 @@ package com.elegion.test.reddit.weather
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fr_weather.*
 /**
  * Created by Vladislav Falzan.
  */
-class WeatherFragment : BaseFragment() {
+class WeatherFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private val mWeatherManager = ManagerProvider.provide()
 
@@ -63,5 +64,9 @@ class WeatherFragment : BaseFragment() {
         if (weather_list.adapter == null) {
             weather_list.adapter = WeatherAdapter()
         }
+    }
+
+    override fun onRefresh() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
