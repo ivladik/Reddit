@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fr_weather.*
 /**
  * Created by Vladislav Falzan.
  */
-class WeatherFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
+class WeatherFragment : BaseFragment() {
 
     private val mWeatherManager = ManagerProvider.provide()
 
@@ -64,9 +64,5 @@ class WeatherFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         if (weather_list.adapter == null) {
             weather_list.adapter = WeatherAdapter()
         }
-    }
-
-    override fun onRefresh() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
