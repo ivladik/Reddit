@@ -4,7 +4,6 @@ import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.widget.Toolbar
 import com.elegion.test.reddit.R
 import kotlinx.android.synthetic.main.ac_main.*
@@ -27,30 +26,13 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeFragment(f: Fragment, cleanStack: Boolean = false) {
+    private fun changeFragment(f: Fragment) {
+        val addToBackStack = supportFragmentManager.findFragmentById(R.id.container) != null
         val ft = supportFragmentManager.beginTransaction()
-        if (cleanStack) {
-            clearBackStack()
+                .replace(R.id.container, f)
+        if (addToBackStack) {
+            ft.addToBackStack(f::class.java.simpleName)
         }
-        ft.replace(R.id.container, f)
-        ft.addToBackStack(null)
         ft.commit()
-    }
-
-    private fun clearBackStack() {
-        val manager = supportFragmentManager
-        if (manager.backStackEntryCount > 0) {
-            val first = manager.getBackStackEntryAt(0)
-            manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        }
-    }
-
-    override fun onBackPressed() {
-        val fragmentManager = supportFragmentManager
-        if (fragmentManager.backStackEntryCount > 1) {
-            fragmentManager.popBackStack()
-        } else {
-            finish()
-        }
     }
 }
