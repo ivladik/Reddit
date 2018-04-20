@@ -1,4 +1,4 @@
-package com.elegion.test.reddit.weather
+package com.elegion.test.reddit.manager
 
 import com.elegion.test.reddit.BuildConfig
 import com.elegion.test.reddit.api.OpenWeatherRestApi

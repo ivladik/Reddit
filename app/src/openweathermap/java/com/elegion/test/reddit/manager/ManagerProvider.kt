@@ -1,6 +1,6 @@
-package com.elegion.test.reddit.api
+package com.elegion.test.reddit.manager
 
-import com.elegion.test.reddit.weather.OpenWeatherManager
+import com.elegion.test.reddit.manager.OpenWeatherManager
 
 /**
  * Created by Vladislav Falzan.

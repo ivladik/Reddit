@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elegion.test.reddit.common.BaseFragment
 import com.elegion.test.reddit.R
-import com.elegion.test.reddit.api.ManagerProvider
+import com.elegion.test.reddit.manager.ManagerProvider
 import com.elegion.test.reddit.weather.adapter.WeatherAdapter
 import com.elegion.test.reddit.extensions.inflate
 import io.reactivex.android.schedulers.AndroidSchedulers

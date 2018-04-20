@@ -1,4 +1,4 @@
-package com.elegion.test.reddit.api
+package com.elegion.test.reddit.manager
 
 import com.elegion.test.reddit.weather.WorldWeatherManager
 
